@@ -1,0 +1,33 @@
+# Adaptation from https://wiki.mikrotik.com/wiki/Dynamic_DNS_Update_Script_for_NO-IP_DNS
+# NOIPDomains can be a comma separated list without spaces, ie: "domain.ddns.net,no-ip.org"
+# Set policy to read,write,test
+# Create a scheduler with Name and OnEvent with same name as the script
+
+##############Script Settings##################
+
+:local NOIPUser ""
+:local NOIPPass ""
+:local WANInter ""
+:local NOIPDomains ""
+
+###############################################
+
+:local IpCurrent [/ip address get [find interface=$WANInter] address];
+:local noiphostarray
+:set noiphostarray [:toarray $NOIPDomains]
+
+:log info "NO-IP: Running"
+:for i from=( [:len $IpCurrent] - 1) to=0 do={
+    :if ( [:pick $IpCurrent $i] = "/") do={
+        :local NewIP [:pick $IpCurrent 0 $i];
+        :foreach host in=$noiphostarray do={
+            :if ([:resolve $host] != $NewIP) do={
+                /tool fetch mode=http user=$NOIPUser password=$NOIPPass url="http://dynupdate.no-ip.com/nic/update\3Fhostname=$host&myip=$NewIP" keep-result=no
+                :log info "NO-IP: Updating $host - $NewIP"
+            } else= {
+                :log info "NO-IP: Checking $host"
+            }
+        }
+    }
+}
+:log info "NO-IP: Finished"
