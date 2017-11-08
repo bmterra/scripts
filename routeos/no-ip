@@ -22,7 +22,7 @@
         :local NewIP [:pick $IpCurrent 0 $i];
         :foreach host in=$noiphostarray do={
             :if ([:resolve $host] != $NewIP) do={
-                /tool fetch mode=http user=$NOIPUser password=$NOIPPass url="http://dynupdate.no-ip.com/nic/update\3Fhostname=$host&myip=$NewIP" keep-result=no
+                /tool fetch mode=https user=$NOIPUser password=$NOIPPass url="https://dynupdate.no-ip.com/nic/update\3Fhostname=$host&myip=$NewIP" keep-result=no
                 :log info "NO-IP: Updating $host - $NewIP"
             } else= {
                 :log info "NO-IP: Checking $host"
