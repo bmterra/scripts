@@ -29,6 +29,10 @@ Get-AppxPackage *Microsoft3DViewer* | Remove-AppxPackage
 Get-AppxPackage *StorePurchaseApp* | Remove-AppxPackage
 Get-AppxPackage *Wallet* | Remove-AppxPackage
 Get-AppxPackage *MicrosoftEdge* | Remove-AppxPackage
+Get-AppxPackage *Bubble* | Remove-AppxPackage
+Get-AppxPackage *Candy* | Remove-AppxPackage
+Get-AppxPackage *Disney* | Remove-AppxPackage
+Get-AppxPackage *Empires* | Remove-AppxPackage
 Get-AppXProvisionedPackage -Online | Select PackageName | Remove-AppXProvisionedPackage -Online
 taskkill /f /im OneDrive.exe
 c:\Windows\SysWOW64\OneDriveSetup.exe /uninstall
