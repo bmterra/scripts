@@ -1,4 +1,4 @@
-# Adaptation from https://wiki.mikrotik.com/wiki/Dynamic_DNS_Update_Script_for_NO-IP_DNS
+# Adaptation from https://wiki.mikrotik.com/wiki/Scripts (Dynamic_DNS_Update_Script_for_NO-IP_DNS)
 # NOIPDomains can be a comma separated list without spaces, ie: "domain.ddns.net,no-ip.org"
 # Set policy to read,write,test
 # Create a scheduler with Name and OnEvent with same name as the script
